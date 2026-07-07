@@ -757,7 +757,7 @@ export default function Home() {
               <div className="flex flex-col gap-5">
                 {[
                   { icon: <Zap className="w-6 h-6 text-purple-300" />, title: "Short-Form Content", desc: "High-retention TikToks, Reels, and YouTube Shorts designed with viral hooks, captions, and fast-paced styling.", tags: ["TikTok", "Reels", "Shorts"] },
-                  { icon: <Play className="w-6 h-6 text-purple-300" />, title: "YouTube Automation & Vlogs", desc: "Engaging long-form edits, complete with A/B testing variations, sound design, and audience retention strategies.", tags: ["Long-form", "Vlogs", "Documentaries"] },
+                  { icon: <Play className="w-6 h-6 text-purple-300" />, title: "YouTube Videos & Vlogs", desc: "Engaging long-form edits, complete with A/B testing variations, sound design, and audience retention strategies.", tags: ["Long-form", "Vlogs", "Documentaries"] },
                   { icon: <Layers className="w-6 h-6 text-purple-300" />, title: "Commercials & Brand Promos", desc: "Cinematic color grading, visual effects, and professional sound mixing for high-end campaigns.", tags: ["Color Grading", "VFX", "Sound Design"] },
                 ].map((srv, idx) => (
                   <div
