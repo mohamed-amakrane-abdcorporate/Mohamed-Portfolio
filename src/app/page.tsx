@@ -155,9 +155,6 @@ export default function Home() {
       gsap.from(".animate-video", {
         scale: 0.93, opacity: 0, duration: 1.4, delay: 0.3, ease: "power3.out",
       });
-      gsap.from(".animate-testimonial", {
-        y: 30, opacity: 0, duration: 1, delay: 0.85, ease: "back.out(1.7)",
-      });
 
       // ── Marquee ────────────────────────────────────────────────
       gsap.from(".animate-marquee-wrap", {
@@ -215,16 +212,6 @@ export default function Home() {
         yPercent: 18,
         ease: "none",
         scrollTrigger: { trigger: ".hero-col-right", start: "top top", end: "bottom top", scrub: true },
-      });
-
-      // ── Floating testimonial ───────────────────────────────────
-      gsap.to(".animate-testimonial", {
-        y: -10,
-        duration: 2.8,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.5,
       });
 
       // ── Work grid stagger from alternating sides ───────────────
@@ -428,7 +415,7 @@ export default function Home() {
 
       <div
         ref={containerRef}
-        className="min-h-screen text-purple-100 font-sans selection:bg-purple-600 selection:text-white relative overflow-hidden"
+        className="min-h-screen text-purple-100 font-sans selection:bg-purple-600 selection:text-white relative overflow-x-clip"
       >
         {/* Grain overlay */}
         <div className="grain-overlay" />
@@ -546,49 +533,6 @@ export default function Home() {
                 My work
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
               </button>
-            </div>
-
-            {/* Testimonial card */}
-            <div className="relative isolate animate-testimonial w-fit">
-              <div
-                className="absolute -inset-4 z-0 opacity-15 pointer-events-none"
-                style={{
-                  backgroundImage: "radial-gradient(#8B5CF6 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse at center, black 40%, transparent 70%)",
-                }}
-              />
-              <div className="bg-purple-950/40 backdrop-blur-md border border-purple-500/15 p-7 rounded-[24px] w-full max-w-[360px] shadow-[0_12px_40px_rgba(0,0,0,0.3)] relative z-10 transition-transform hover:-translate-y-1.5 duration-300">
-                <p className="text-purple-200/80 mb-6 text-[15px] leading-relaxed italic">
-                  "We loved smooth edits and fast delivery that improved our
-                  videos and saved valuable time"
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="font-semibold text-white">William</span>
-                    <span className="text-purple-800">•</span>
-                    <div className="flex gap-0.5">
-                      {[1, 2, 3, 4, 5].map(i => (
-                        <Star
-                          key={i}
-                          className="w-[14px] h-[14px] fill-purple-400 text-purple-400"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <img
-                      src="https://i.pravatar.cc/100?img=11"
-                      alt="William"
-                      className="w-[42px] h-[42px] rounded-full border-[3px] border-purple-500/20 shadow-sm object-cover"
-                    />
-                    <div className="absolute -bottom-1 -right-1 bg-purple-900 border border-purple-500/30 rounded-full p-[3px] shadow-sm flex items-center justify-center">
-                      <span className="text-[10px] leading-none">💬</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
