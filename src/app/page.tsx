@@ -461,7 +461,7 @@ export default function Home() {
         </nav>
 
         {/* ────────────────── HERO ────────────────── */}
-        <main className="max-w-[1400px] mx-auto px-6 md:px-12 pt-36 md:pt-44 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-10 items-start relative z-10">
+        <main className="max-w-[1400px] mx-auto px-6 md:px-12 pt-28 md:pt-36 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-10 items-center relative z-10">
           {/* Left column */}
           <div className="flex flex-col justify-center animate-fade-up max-w-[600px]">
             <div className="inline-flex items-center gap-2.5 mb-8">
@@ -569,7 +569,7 @@ export default function Home() {
         </main>
 
         {/* ────────────────── MARQUEE ────────────────── */}
-        <section className="marquee-section mt-28 md:mt-36 border-y border-purple-500/10 overflow-hidden animate-marquee-wrap relative z-10">
+        <section className="marquee-section mt-16 md:mt-24 border-y border-purple-500/10 overflow-hidden animate-marquee-wrap relative z-10">
           <div className="py-5">
             <div className="marquee-track flex items-center gap-0 w-max">
               {[...Array(2)].flatMap((_, gi) =>
@@ -600,7 +600,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── SOCIAL PROOF ────────────────── */}
-        <section className="social-proof-section relative w-full max-w-3xl mx-auto mt-36 pt-10 px-6 text-center z-10">
+        <section className="social-proof-section relative w-full max-w-3xl mx-auto mt-20 md:mt-28 pt-6 px-6 text-center z-10">
           <div className="animate-social-part flex justify-center items-center gap-4 mb-8">
             <div className="flex -space-x-3">
               {[4, 5, 6].map(i => (
@@ -637,7 +637,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── ABOUT + STATS ────────────────── */}
-        <section className="about-section max-w-5xl mx-auto mt-40 px-6 text-center relative z-10">
+        <section className="about-section max-w-5xl mx-auto mt-24 md:mt-32 px-6 text-center relative z-10">
           <div className="animate-about-part flex justify-center items-center gap-2.5 mb-8">
             <span className="w-2 h-2 bg-purple-500 rounded-full" />
             <span className="text-[13px] font-semibold text-purple-300 uppercase tracking-widest">
@@ -645,18 +645,29 @@ export default function Home() {
             </span>
           </div>
 
+          <div className="animate-about-part flex justify-center mb-8">
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-full bg-purple-500/20 blur-2xl" />
+              <img
+                src="/assets/1.png"
+                alt="Mohamed Lahmachi"
+                className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-purple-500/30 shadow-[0_12px_40px_rgba(139,92,246,0.25)]"
+              />
+            </div>
+          </div>
+
           <h2 className="animate-about-part text-4xl md:text-[56px] font-bold tracking-tight mb-6 text-white font-display">
             Hi, I'm Mohamed Lahmachi
           </h2>
 
-          <p className="animate-about-part text-lg md:text-xl text-purple-200/60 mb-16 max-w-[600px] mx-auto leading-relaxed">
+          <p className="animate-about-part text-lg md:text-xl text-purple-200/60 mb-12 max-w-[600px] mx-auto leading-relaxed">
             A freelance video editor with 5+ years of experience crafting
             cinematic content for YouTube, Instagram, TikTok and beyond.
             I turn raw footage into stories people can't stop watching.
           </p>
 
           {/* Service cards */}
-          <div className="services-row grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-left">
+          <div className="services-row grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 text-left">
             {[
               {
                 icon: <Zap className="w-5 h-5 text-purple-400" />,
@@ -711,7 +722,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── SERVICES SECTION ────────────────── */}
-        <section className="services-section border-t border-purple-500/10 mt-24 md:mt-32 pt-20 md:pt-32 pb-16 relative z-10">
+        <section className="services-section border-t border-purple-500/10 mt-20 md:mt-24 pt-16 md:pt-20 pb-16 relative z-10">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-12 lg:gap-20 items-start">
               {/* Left: sticky header */}
@@ -780,7 +791,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── WORK GALLERY (with dynamic local video players & category filters) ────────────────── */}
-        <section className="work-section max-w-[1200px] mx-auto mt-32 px-6 text-center relative z-10">
+        <section className="work-section max-w-[1200px] mx-auto mt-20 md:mt-24 px-6 text-center relative z-10">
           <div className="animate-work-part flex justify-center items-center gap-2.5 mb-8">
             <span className="w-2 h-2 bg-purple-500 rounded-full" />
             <span className="text-[13px] font-semibold text-purple-300 uppercase tracking-widest">
@@ -923,7 +934,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── CONTACT ────────────────── */}
-        <section className="contact-section relative max-w-[1400px] mx-auto mt-32 mb-10 px-6 md:px-12 relative z-10">
+        <section className="contact-section relative max-w-[1400px] mx-auto mt-20 md:mt-24 mb-10 px-6 md:px-12 relative z-10">
           <div className="bg-[#0f0a21] border border-purple-500/15 rounded-[40px] p-10 md:p-20 text-center overflow-hidden relative isolate group shadow-[0_20px_50px_rgba(139,92,246,0.1)]">
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600 rounded-full blur-[150px] opacity-20 -translate-y-1/2 translate-x-1/3 group-hover:opacity-40 transition-opacity duration-1000" />
@@ -946,12 +957,12 @@ export default function Home() {
             </p>
             
             <div className="animate-contact-part flex flex-col sm:flex-row items-center justify-center gap-5 relative z-10">
-              <a href="mailto:hello@mohamedlahmachi.com" className="w-full sm:w-auto">
+              <a href="mailto:Mohaamedlahmachii@gmail.com" className="w-full sm:w-auto">
                 <MagneticButton className="w-full sm:w-auto bg-white text-purple-950 px-10 py-4 rounded-full text-[16px] font-bold hover:bg-purple-100 transition-all duration-300 shadow-xl">
                   Email Me
                 </MagneticButton>
               </a>
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <a href="https://wa.me/212675639152" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                 <MagneticButton className="w-full sm:w-auto bg-[#25D366] text-white px-10 py-4 rounded-full text-[16px] font-semibold hover:bg-[#20bd5a] transition-colors shadow-xl shadow-[#25D366]/20 flex items-center justify-center gap-2">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                   WhatsApp
