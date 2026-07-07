@@ -264,7 +264,42 @@ export default function Home() {
 
     }, containerRef);
 
-    return () => ctx.revert();
+    // Videos/images load asynchronously (Blob is remote), which changes page
+    // height after ScrollTrigger measured its positions. Refresh so reveal
+    // triggers fire correctly and don't leave sections blank.
+    const refresh = () => ScrollTrigger.refresh();
+    const timers = [
+      setTimeout(refresh, 400),
+      setTimeout(refresh, 1200),
+      setTimeout(refresh, 2500),
+    ];
+    window.addEventListener("load", refresh);
+
+    // Safety net: if anything is still hidden after load, force it visible so
+    // there is never a big empty gap where a section should be.
+    const safety = setTimeout(() => {
+      gsap.set(
+        [
+          ".animate-service-item",
+          ".animate-service-header",
+          ".animate-about-part",
+          ".animate-work-part",
+          ".animate-social-part",
+          ".animate-contact-part",
+          ".animate-service-card",
+          ".animate-reel",
+        ],
+        { clearProps: "opacity,transform", opacity: 1 },
+      );
+      ScrollTrigger.refresh();
+    }, 3000);
+
+    return () => {
+      timers.forEach(clearTimeout);
+      clearTimeout(safety);
+      window.removeEventListener("load", refresh);
+      ctx.revert();
+    };
   }, []);
 
   const navLinks = ["About", "Work", "Services", "Process", "Contact"];
