@@ -269,9 +269,9 @@ export default function Home() {
     // triggers fire correctly and don't leave sections blank.
     const refresh = () => ScrollTrigger.refresh();
     const timers = [
-      setTimeout(refresh, 400),
-      setTimeout(refresh, 1200),
-      setTimeout(refresh, 2500),
+      setTimeout(refresh, 300),
+      setTimeout(refresh, 800),
+      setTimeout(refresh, 1500),
     ];
     window.addEventListener("load", refresh);
 
@@ -292,7 +292,7 @@ export default function Home() {
         { clearProps: "opacity,transform", opacity: 1 },
       );
       ScrollTrigger.refresh();
-    }, 3000);
+    }, 1800);
 
     return () => {
       timers.forEach(clearTimeout);
@@ -302,7 +302,16 @@ export default function Home() {
     };
   }, []);
 
-  const navLinks = ["About", "Work", "Services", "Process", "Contact"];
+  const navLinks = [
+    { label: "About", href: "#about" },
+    { label: "Work", href: "#work" },
+    { label: "Services", href: "#services" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const scrollToId = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   // Real local asset videos array — mapped to the exact /public/assets folder structure
   const workItems: WorkItem[] = [
@@ -449,8 +458,8 @@ export default function Home() {
             {/* Desktop links */}
             <div className="hidden lg:flex items-center gap-10 text-[15px] font-medium text-purple-300/80">
               {navLinks.map(link => (
-                <a key={link} href="#" className="relative group transition-colors hover:text-white">
-                  {link}
+                <a key={link.label} href={link.href} className="relative group transition-colors hover:text-white">
+                  {link.label}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-purple-500 group-hover:w-full transition-all duration-300 ease-out" />
                 </a>
               ))}
@@ -458,7 +467,10 @@ export default function Home() {
 
             {/* CTA + mobile toggle */}
             <div className="flex items-center gap-3">
-              <MagneticButton className="hidden lg:block bg-purple-600 text-white px-7 py-3 rounded-full text-[15px] font-medium hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+              <MagneticButton
+                onClick={() => scrollToId("contact")}
+                className="hidden lg:block bg-purple-600 text-white px-7 py-3 rounded-full text-[15px] font-medium hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+              >
                 Contact us
               </MagneticButton>
               <button
@@ -480,15 +492,18 @@ export default function Home() {
             <div className="bg-[#080414]/95 backdrop-blur-xl border-t border-purple-500/10 px-6 py-6 flex flex-col gap-3">
               {navLinks.map(link => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   className="text-[17px] font-medium py-1 text-purple-200 hover:text-purple-400 transition-colors"
                   onClick={() => setMenuOpen(false)}
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
-              <button className="mt-3 bg-purple-600 text-white px-7 py-3.5 rounded-full text-[15px] font-medium w-full hover:bg-purple-500 transition-colors">
+              <button
+                onClick={() => { setMenuOpen(false); scrollToId("contact"); }}
+                className="mt-3 bg-purple-600 text-white px-7 py-3.5 rounded-full text-[15px] font-medium w-full hover:bg-purple-500 transition-colors"
+              >
                 Contact us
               </button>
             </div>
@@ -518,10 +533,16 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap items-center gap-6 mb-12">
-              <MagneticButton className="bg-purple-600 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 active:scale-[0.97]">
+              <MagneticButton
+                onClick={() => scrollToId("contact")}
+                className="bg-purple-600 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 active:scale-[0.97]"
+              >
                 Contact Us
               </MagneticButton>
-              <button className="flex items-center gap-2 font-medium text-lg text-purple-300 hover:text-white transition-colors group">
+              <button
+                onClick={() => scrollToId("work")}
+                className="flex items-center gap-2 font-medium text-lg text-purple-300 hover:text-white transition-colors group"
+              >
                 My work
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
               </button>
@@ -589,6 +610,7 @@ export default function Home() {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="hero-img absolute inset-0 w-full h-full object-cover transition-transform duration-[12s] ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/40" />
@@ -665,14 +687,17 @@ export default function Home() {
             precision editing, motion & sound design.
           </p>
 
-          <button className="animate-social-part flex items-center justify-center gap-2 mx-auto font-medium text-[15px] text-purple-300 hover:text-purple-400 transition-colors group">
+          <button
+            onClick={() => scrollToId("work")}
+            className="animate-social-part flex items-center justify-center gap-2 mx-auto font-medium text-[15px] text-purple-300 hover:text-purple-400 transition-colors group"
+          >
             Browse work
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
         </section>
 
         {/* ────────────────── ABOUT + STATS ────────────────── */}
-        <section className="about-section max-w-5xl mx-auto mt-24 md:mt-32 px-6 text-center relative z-10">
+        <section id="about" className="about-section max-w-5xl mx-auto mt-24 md:mt-32 px-6 text-center relative z-10 scroll-mt-24">
           <div className="animate-about-part flex justify-center items-center gap-2.5 mb-8">
             <span className="w-2 h-2 bg-purple-500 rounded-full" />
             <span className="text-[13px] font-semibold text-purple-300 uppercase tracking-widest">
@@ -757,7 +782,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── SERVICES SECTION ────────────────── */}
-        <section className="services-section border-t border-purple-500/10 mt-20 md:mt-24 pt-16 md:pt-20 pb-16 relative z-10">
+        <section id="services" className="services-section border-t border-purple-500/10 mt-20 md:mt-24 pt-16 md:pt-20 pb-16 relative z-10 scroll-mt-16">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-12 lg:gap-20 items-start">
               {/* Left: sticky header */}
@@ -775,7 +800,10 @@ export default function Home() {
                 <p className="text-base md:text-lg text-purple-200/60 max-w-[420px] leading-relaxed mb-10">
                   I offer end-to-end video production and editing services designed to hold attention, drive engagement, and convert viewers into fans.
                 </p>
-                <MagneticButton className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 active:scale-[0.97]">
+                <MagneticButton
+                  onClick={() => scrollToId("contact")}
+                  className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 active:scale-[0.97]"
+                >
                   Discuss a Project
                   <ArrowRight className="w-4 h-4" />
                 </MagneticButton>
@@ -826,7 +854,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── WORK GALLERY (with dynamic local video players & category filters) ────────────────── */}
-        <section className="work-section max-w-[1200px] mx-auto mt-20 md:mt-24 px-6 text-center relative z-10">
+        <section id="work" className="work-section max-w-[1200px] mx-auto mt-20 md:mt-24 px-6 text-center relative z-10 scroll-mt-24">
           <div className="animate-work-part flex justify-center items-center gap-2.5 mb-8">
             <span className="w-2 h-2 bg-purple-500 rounded-full" />
             <span className="text-[13px] font-semibold text-purple-300 uppercase tracking-widest">
@@ -865,8 +893,8 @@ export default function Home() {
 
           {/* Reels video grid */}
           <div className="relative isolate pt-4 max-w-[1100px] mx-auto">
-            <div className={`work-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 rounded-[32px] border border-purple-500/10 transition-all duration-500 overflow-hidden ${
-              showAll ? "max-h-[3000px]" : "max-h-[1080px]"
+            <div className={`work-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 rounded-[32px] border border-purple-500/10 transition-all duration-500 ${
+              showAll || filteredItems.length <= 6 ? "" : "max-h-[1080px] overflow-hidden"
             }`}>
               {displayedItems.map((item, idx) => (
                 <div
@@ -885,6 +913,7 @@ export default function Home() {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
@@ -969,7 +998,7 @@ export default function Home() {
         </section>
 
         {/* ────────────────── CONTACT ────────────────── */}
-        <section className="contact-section relative max-w-[1400px] mx-auto mt-20 md:mt-24 mb-10 px-6 md:px-12 relative z-10">
+        <section id="contact" className="contact-section max-w-[1400px] mx-auto mt-20 md:mt-24 mb-10 px-6 md:px-12 relative z-10 scroll-mt-24">
           <div className="bg-[#0f0a21] border border-purple-500/15 rounded-[40px] p-10 md:p-20 text-center overflow-hidden relative isolate group shadow-[0_20px_50px_rgba(139,92,246,0.1)]">
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600 rounded-full blur-[150px] opacity-20 -translate-y-1/2 translate-x-1/3 group-hover:opacity-40 transition-opacity duration-1000" />
