@@ -655,7 +655,7 @@ export default function Home() {
               <img
                 src="/assets/1.png"
                 alt="Mohamed Lahmachi"
-                className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-purple-500/30 shadow-[0_12px_40px_rgba(139,92,246,0.25)]"
+                className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover object-top border-2 border-purple-500/30 shadow-[0_12px_40px_rgba(139,92,246,0.25)]"
               />
             </div>
           </div>
