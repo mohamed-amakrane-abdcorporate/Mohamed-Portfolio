@@ -95,6 +95,46 @@ function MagneticButton({
   );
 }
 
+/* ── Autoplay Video (reliable preview in grid + hero) ───────────── */
+function AutoplayVideo({ src, className }: { src: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+
+    const play = () => {
+      video.play().catch(() => {});
+    };
+
+    play();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) play();
+        else video.pause();
+      },
+      { threshold: 0.12 },
+    );
+    observer.observe(video);
+
+    return () => observer.disconnect();
+  }, [src]);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      className={className}
+    />
+  );
+}
+
 /* ── Work Item Data Type ────────────────────────────────────────── */
 interface WorkItem {
   title: string;
@@ -104,13 +144,9 @@ interface WorkItem {
   creator: string;
 }
 
-/* ── Media base ─────────────────────────────────────────────────────
-   Local dev: empty → videos served from /public/assets on disk.
-   Production: set NEXT_PUBLIC_MEDIA_BASE_URL to the Vercel Blob origin
-   (e.g. https://xxxx.public.blob.vercel-storage.com) so videos load
-   from Blob instead of the repo.                                        */
+/* ── Media paths (served from /public/assets in deployment) ─────── */
 const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_BASE_URL ?? "";
-const media = (path: string) => `${MEDIA_BASE}${path}`;
+const media = (path: string) => `${MEDIA_BASE}${encodeURI(path)}`;
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function Home() {
@@ -297,7 +333,11 @@ export default function Home() {
   ];
 
   const scrollToId = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navOffset = 96;
+    const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   // Real local asset videos array — mapped to the exact /public/assets folder structure
@@ -445,7 +485,12 @@ export default function Home() {
             {/* Desktop links */}
             <div className="hidden lg:flex items-center gap-10 text-[15px] font-medium text-purple-300/80">
               {navLinks.map(link => (
-                <a key={link.label} href={link.href} className="relative group transition-colors hover:text-white">
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => { e.preventDefault(); scrollToId(link.href.slice(1)); }}
+                  className="relative group transition-colors hover:text-white"
+                >
                   {link.label}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-purple-500 group-hover:w-full transition-all duration-300 ease-out" />
                 </a>
@@ -482,7 +527,11 @@ export default function Home() {
                   key={link.label}
                   href={link.href}
                   className="text-[17px] font-medium py-1 text-purple-200 hover:text-purple-400 transition-colors"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMenuOpen(false);
+                    scrollToId(link.href.slice(1));
+                  }}
                 >
                   {link.label}
                 </a>
@@ -548,12 +597,8 @@ export default function Home() {
               })}
               className="hero-col-right relative animate-video w-full max-w-[360px] sm:max-w-[400px] md:max-w-[420px] lg:max-w-[400px] xl:max-w-[440px] aspect-[9/16] rounded-[32px] overflow-hidden group shadow-[0_25px_60px_rgba(139,92,246,0.28)] border border-purple-500/20 cursor-pointer"
             >
-              <video
+              <AutoplayVideo
                 src={media("/assets/video.mp4")}
-                autoPlay
-                loop
-                muted
-                playsInline
                 className="hero-img absolute inset-0 w-full h-full object-cover transition-transform duration-[12s] ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/40" />
@@ -850,12 +895,8 @@ export default function Home() {
                   }`}
                 >
                   {/* Local video source player */}
-                  <video
+                  <AutoplayVideo
                     src={media(item.video)}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
@@ -985,11 +1026,9 @@ export default function Home() {
           </div>
           <p className="text-sm text-purple-300/40">© 2026 Mohamed Lahmachi. All rights reserved.</p>
           <div className="flex items-center gap-8 text-sm text-purple-300/60">
-            {["Privacy", "Terms", "Contact"].map(l => (
-              <a key={l} href="#" className="hover:text-white transition-colors">
-                {l}
-              </a>
-            ))}
+            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToId("contact"); }} className="hover:text-white transition-colors">
+              Contact
+            </a>
           </div>
         </footer>
 
