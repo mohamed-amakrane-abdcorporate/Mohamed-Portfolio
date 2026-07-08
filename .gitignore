@@ -36,13 +36,8 @@ yarn-error.log*
 # vercel
 .vercel
 
-# large media assets (hosted on Vercel Blob, not committed)
-/public/assets/**/*.mp4
-/public/assets/*.mp4
-/public/assets/**/*.mov
-/public/assets/*.mov
-/public/assets/**/*.webm
-/public/assets/*.webm
+# large media assets — served from /public/assets in deployment
+# (Vercel Blob fallback via NEXT_PUBLIC_MEDIA_BASE_URL if set)
 
 # local env for scripts
 .env.local
@@ -50,3 +45,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ffmpeg originals from compression
+**/*.orig

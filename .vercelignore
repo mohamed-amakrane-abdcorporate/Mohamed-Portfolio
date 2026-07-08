@@ -1,7 +1,0 @@
-# Large media is served from Vercel Blob, not uploaded with the deployment
-public/assets/**/*.mp4
-public/assets/*.mp4
-public/assets/**/*.mov
-public/assets/*.mov
-public/assets/**/*.webm
-public/assets/*.webm

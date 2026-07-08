@@ -554,7 +554,6 @@ export default function Home() {
                 loop
                 muted
                 playsInline
-                preload="metadata"
                 className="hero-img absolute inset-0 w-full h-full object-cover transition-transform duration-[12s] ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/40" />
@@ -857,7 +856,6 @@ export default function Home() {
                     loop
                     muted
                     playsInline
-                    preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
